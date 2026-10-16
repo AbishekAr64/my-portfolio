@@ -93,24 +93,31 @@ tickerToggle.addEventListener('click', () => {
   document.querySelector('.tool-strip').classList.toggle('is-paused', paused);
 });
 
-// Keep the referenced video controllable, including when autoplay is blocked.
-const agentVideo = document.getElementById('brand-agent-video');
-const agentToggle = document.querySelector('.agent-toggle');
-function syncAgentControl() {
-  const playing = !agentVideo.paused;
-  agentToggle.textContent = playing ? 'Ⅱ' : '▶';
-  agentToggle.setAttribute('aria-label', playing ? 'Pause character animation' : 'Play character animation');
-  agentToggle.setAttribute('aria-pressed', String(playing));
+// Local vector animation: no video, background image, or remote media dependency.
+const agentCharacter = document.querySelector('.brand-agent');
+let agentPausedByUser = false;
+function syncAgentMotion() {
+  const paused = agentPausedByUser || motionPreference.matches;
+  agentCharacter.classList.toggle('is-paused', paused);
+  agentCharacter.setAttribute('aria-pressed', String(paused));
+  const label = motionPreference.matches ? 'AI character animation disabled by reduced-motion preference' : (paused ? 'Play AI character animation' : 'Pause AI character animation');
+  agentCharacter.setAttribute('aria-label', label);
+  agentCharacter.title = label;
 }
-agentToggle.addEventListener('click', () => {
-  if (agentVideo.paused) agentVideo.play().catch(syncAgentControl);
-  else agentVideo.pause();
+agentCharacter.addEventListener('click', () => {
+  if (motionPreference.matches) return;
+  agentPausedByUser = !agentPausedByUser;
+  syncAgentMotion();
 });
-agentVideo.addEventListener('play', syncAgentControl);
-agentVideo.addEventListener('pause', syncAgentControl);
-function applyAgentMotionPreference() {
-  if (motionPreference.matches) agentVideo.pause();
-  else agentVideo.play().catch(syncAgentControl);
-}
-motionPreference.addEventListener('change', applyAgentMotionPreference);
-applyAgentMotionPreference();
+agentCharacter.addEventListener('pointermove', event => {
+  if (motionPreference.matches || agentPausedByUser) return;
+  const box = agentCharacter.getBoundingClientRect();
+  agentCharacter.style.setProperty('--look-x', ((event.clientX - box.left) / box.width - .5) * 5 + 'px');
+  agentCharacter.style.setProperty('--look-y', ((event.clientY - box.top) / box.height - .5) * 3 + 'px');
+});
+agentCharacter.addEventListener('pointerleave', () => {
+  agentCharacter.style.setProperty('--look-x', '0px');
+  agentCharacter.style.setProperty('--look-y', '0px');
+});
+motionPreference.addEventListener('change', syncAgentMotion);
+syncAgentMotion();
