@@ -1,6 +1,6 @@
 // Content is visible by default; animation is a progressive enhancement.
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-const targets = document.querySelectorAll('.reveal, .hero-copy > *, .about > *, .timeline article, .journey > div:first-child');
+const targets = document.querySelectorAll('.reveal:not(.contact), .contact > *, .hero-copy h1 > span, .about > *, .timeline article, .journey > div:first-child');
 let revealObserver;
 function configureReveals() {
   revealObserver?.disconnect();
@@ -83,3 +83,12 @@ dialog.addEventListener('cancel', event => {
 });
 dialog.addEventListener('click', event => { if (event.target === dialog) { const box = dialog.getBoundingClientRect(); if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) closeProject(); } });
 dialog.addEventListener('close', () => { document.body.style.overflow = ''; });
+
+const tickerToggle = document.querySelector('.ticker-toggle');
+tickerToggle.addEventListener('click', () => {
+  const paused = tickerToggle.getAttribute('aria-pressed') !== 'true';
+  tickerToggle.setAttribute('aria-pressed', String(paused));
+  tickerToggle.setAttribute('aria-label', paused ? 'Resume toolkit animation' : 'Pause toolkit animation');
+  tickerToggle.textContent = paused ? '▶' : 'Ⅱ';
+  document.querySelector('.tool-strip').classList.toggle('is-paused', paused);
+});
