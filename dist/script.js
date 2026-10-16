@@ -92,3 +92,25 @@ tickerToggle.addEventListener('click', () => {
   tickerToggle.textContent = paused ? '▶' : 'Ⅱ';
   document.querySelector('.tool-strip').classList.toggle('is-paused', paused);
 });
+
+// Keep the referenced video controllable, including when autoplay is blocked.
+const agentVideo = document.getElementById('brand-agent-video');
+const agentToggle = document.querySelector('.agent-toggle');
+function syncAgentControl() {
+  const playing = !agentVideo.paused;
+  agentToggle.textContent = playing ? 'Ⅱ' : '▶';
+  agentToggle.setAttribute('aria-label', playing ? 'Pause character animation' : 'Play character animation');
+  agentToggle.setAttribute('aria-pressed', String(playing));
+}
+agentToggle.addEventListener('click', () => {
+  if (agentVideo.paused) agentVideo.play().catch(syncAgentControl);
+  else agentVideo.pause();
+});
+agentVideo.addEventListener('play', syncAgentControl);
+agentVideo.addEventListener('pause', syncAgentControl);
+function applyAgentMotionPreference() {
+  if (motionPreference.matches) agentVideo.pause();
+  else agentVideo.play().catch(syncAgentControl);
+}
+motionPreference.addEventListener('change', applyAgentMotionPreference);
+applyAgentMotionPreference();
