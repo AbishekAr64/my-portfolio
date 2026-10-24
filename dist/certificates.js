@@ -10,13 +10,15 @@ const certificateData = [{"title": "Google Data Analytics", "issuer": "Google", 
   function updateArchive() {
     const query = search.value.trim().toLowerCase();
     const matches = cards.filter(card => (category === 'All' || card.dataset.category === category) && card.dataset.search.includes(query));
-    const limit = expanded || category !== 'All' || query ? matches.length : 8;
+    const limit = expanded ? matches.length : 8;
     cards.forEach(card => { card.hidden = true; });
     matches.slice(0, limit).forEach(card => { card.hidden = false; });
     count.textContent = `Showing ${Math.min(limit, matches.length)} of ${matches.length} certificates`;
     document.querySelector('#certificate-empty').hidden = matches.length !== 0;
-    more.hidden = matches.length <= limit;
-    more.firstChild.textContent = `Explore all ${matches.length} certificates `;
+    more.hidden = matches.length <= 8;
+    more.setAttribute('aria-expanded', String(expanded));
+    more.firstChild.textContent = expanded ? 'Show fewer certificates ' : `Explore all ${matches.length} certificates `;
+    more.querySelector('span').textContent = expanded ? '↑' : '↓';
   }
   filters.forEach(button => button.addEventListener('click', () => {
     category = button.dataset.filter;
@@ -24,11 +26,12 @@ const certificateData = [{"title": "Google Data Analytics", "issuer": "Google", 
     filters.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
     updateArchive();
   }));
-  search.addEventListener('input', updateArchive);
+  search.addEventListener('input', () => { expanded = false; updateArchive(); });
   more.addEventListener('click', () => {
     const firstHidden = cards.find(card => card.hidden);
-    expanded = true;
+    expanded = !expanded;
     updateArchive();
+    if (!expanded) { document.querySelector('.certificate-tools').scrollIntoView({block:'start', behavior:'instant'}); more.focus({preventScroll:true}); return; }
     firstHidden?.querySelector('button').focus({preventScroll:true});
   });
   const dialog = document.querySelector('#certificate-dialog');
