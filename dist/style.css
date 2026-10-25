@@ -263,3 +263,38 @@ header .nav-contact:active{scale:.97}
 @media(max-width:1000px){.journey{gap:35px}.journey-card{padding:22px}.journey h2{font-size:40px}.milestone-title h3{font-size:21px}}
 @media(max-width:760px){.journey{grid-template-columns:1fr;gap:40px}.journey .journey-intro{position:static}.learning-map{height:240px;margin-inline:auto}.journey-index{max-width:none}.learning-trail{padding-left:24px}.learning-trail:before,.learning-trail:after{left:0}.trail-node{left:-30px}.journey-card{padding:21px}.milestone-title{gap:12px}.milestone-title h3{font-size:21px}}
 @media(prefers-reduced-motion:reduce){.learning-trail:after{transform:none}.map-core{rotate:0}}
+
+/* Continue the hero's violet, slate and teal atmosphere throughout dark mode. */
+html:not([data-theme=light]){--bg:#1c1929;--muted:#c0b9ce;--line:#b5a4d333}
+html:not([data-theme=light]) body{background:#1c1929}
+html:not([data-theme=light]) :is(.about,.work,.skills-section,.journey,.certificate-section,.contact){position:relative;isolation:isolate;background-color:#211e31}
+html:not([data-theme=light]) :is(.about,.journey){max-width:none;padding-inline:max(64px,calc((100% - 1372px)/2))}
+html:not([data-theme=light]) .about{background-image:radial-gradient(ellipse at 12% 45%,#9278c436,transparent 57%),radial-gradient(ellipse at 95% 85%,#93d9ca20,transparent 52%),linear-gradient(155deg,#231e2b,#29253f 55%,#25313b)}
+html:not([data-theme=light]) .work{background-image:radial-gradient(ellipse at 85% 30%,#93d9ca22,transparent 55%),radial-gradient(ellipse at 10% 85%,#9278c42b,transparent 50%),linear-gradient(160deg,#25313b,#26273b 55%,#302538);color:var(--text)}
+html:not([data-theme=light]) .skills-section{background-image:radial-gradient(ellipse at 15% 20%,#9278c440,transparent 55%),radial-gradient(ellipse at 90% 75%,#93d9ca25,transparent 55%),linear-gradient(135deg,#302538,#29253f 50%,#26333c)}
+html:not([data-theme=light]) .journey{background-image:radial-gradient(ellipse at 15% 45%,#93d9ca24,transparent 50%),radial-gradient(ellipse at 90% 65%,#9278c435,transparent 55%),linear-gradient(155deg,#26333c,#28263c 55%,#322636)}
+html:not([data-theme=light]) .certificate-section{background-image:radial-gradient(ellipse at 85% 12%,#e7a18b20,transparent 46%),radial-gradient(ellipse at 10% 80%,#9278c430,transparent 50%),linear-gradient(155deg,#322636,#29253f 55%,#25313b)}
+html:not([data-theme=light]) .contact{background-image:radial-gradient(ellipse at 15% 65%,#9278c44d,transparent 60%),radial-gradient(ellipse at 85% 85%,#93d9ca33,transparent 55%),linear-gradient(140deg,#25313b,#3a2d48 70%,#292337);color:var(--text)}
+html:not([data-theme=light]) :is(.about,.skills-section,.journey,.certificate-section)::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(#d7c4ff09 1px,transparent 1px),linear-gradient(90deg,#d7c4ff09 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 20% 45%,#000,transparent 75%)}
+html:not([data-theme=light]) .certificate-section::before{background-image:radial-gradient(#d7c4ff24 1px,transparent 1px);background-size:24px 24px}
+html:not([data-theme=light]) :is(.skill-card,.journey-card){background:linear-gradient(135deg,#b9a0ff10,#161b2b70);border-color:#c8b6e538;box-shadow:0 16px 45px #12101e18}
+html:not([data-theme=light]) .about-portrait{background:linear-gradient(145deg,#393149,#222838);border-color:#c8b6e547}
+html:not([data-theme=light]) :is(.credential,.credential-info){background:#242437}
+html:not([data-theme=light]) :is(.work h2>span,.work h3,.contact h2,.contact h2 em){color:var(--text)}
+html:not([data-theme=light]) :is(.work .section-head>p,.work .project p,.work .project-meta){color:var(--muted)}
+html:not([data-theme=light]) .work :is(.pills span,.case-link,.project.wide){border-color:var(--line)}
+html:not([data-theme=light]) .contact-links{border-color:var(--line)}
+html:not([data-theme=light]) .contact .button{background:#e6ddf6;color:#282034}
+html:not([data-theme=light]) .contact .eyebrow i{background:#a8dbcb}
+html:not([data-theme=light]) footer{background:linear-gradient(130deg,#211e30,#292337)}
+@media(max-width:1100px){html:not([data-theme=light]) :is(.about,.journey){padding-inline:36px}}
+@media(max-width:760px){html:not([data-theme=light]) :is(.about,.journey){padding-inline:24px}}
+html:not([data-theme=light]) .certificate-section{color:var(--text)}
+html:not([data-theme=light]) :is(.certificate-intro,.certificate-search,.credential-info p,#certificate-empty){color:var(--muted)}
+html:not([data-theme=light]) :is(.certificate-section .section-label,.certificate-heading h2 em,.credential-type){color:var(--accent)}
+html:not([data-theme=light]) .certificate-search input{color:var(--text);border-color:var(--line)}
+html:not([data-theme=light]) .certificate-search input::placeholder{color:var(--muted)}
+html:not([data-theme=light]) :is(.certificate-filters button,.archive-meta,.archive-more,.credential,.archive-stamp){border-color:var(--line)}
+html:not([data-theme=light]) .certificate-filters button[aria-pressed=true]{background:var(--accent);color:var(--ink);border-color:var(--accent)}
+html:not([data-theme=light]) .archive-more:hover{background:#b9a0ff18}
+html:not([data-theme=light]) .credential-preview{color:var(--ink)}
