@@ -410,3 +410,53 @@ html:not([data-theme=light]) :is(.contact-card-icon,.contact-bottom,.social-mono
 @media(hover:hover) and (prefers-reduced-motion:no-preference){.contact-card:hover{transform:translateY(-4px);border-color:#a487c4;box-shadow:0 15px 40px #21152e18}.contact-card:hover::before{opacity:1}.contact-card:hover .contact-card-arrow{transform:rotate(45deg);background:#b9a0ff20}.contact-message:hover .contact-spark{rotate:90deg}.contact-socials a:hover>span:last-child{translate:3px -3px}}
 @media(max-width:900px){.contact-body{grid-template-columns:1fr;gap:34px}.contact-options{grid-template-columns:1fr 1fr}.contact .contact-message h2{font-size:clamp(42px,7vw,65px)}}
 @media(max-width:600px){.contact{padding-block:60px 28px}.contact-status{font-size:8px;letter-spacing:.7px;gap:8px}.contact-status-line{width:18px}.contact-body{margin-block:34px}.contact-options{grid-template-columns:1fr}.contact-card{padding:22px}.contact-bottom{align-items:start;flex-direction:column;gap:22px}.contact .contact-message h2{font-size:clamp(38px,9vw,54px)}.contact .contact-message>p{font-size:14px}}
+
+/* Dimensional contact objects: CSS-built solids with pointer-driven perspective. */
+.contact-options{perspective:1200px;gap:22px}
+.contact-options .contact-card{min-height:245px;padding:28px 170px 26px 28px;overflow:visible;border-radius:22px;transform:perspective(1000px) rotateX(var(--contact-rx,0deg)) rotateY(var(--contact-ry,0deg));transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s,border-color .4s;box-shadow:0 5px 0 #765a9220,0 18px 35px #12101e12}
+.contact-card::before{border-radius:inherit;background:radial-gradient(circle at var(--contact-x,75%) var(--contact-y,35%),#c2adf92b,transparent 65%)}
+.contact-card-top{margin-bottom:24px}
+.contact-card-top .contact-card-icon{display:none}
+.contact-card-arrow{position:absolute;right:22px;bottom:20px;border:1px solid var(--line);background:#b9a0ff0c}
+.contact-object{position:absolute;right:16px;top:24px;width:145px;height:170px;pointer-events:none;perspective:650px}
+.object-shadow{position:absolute;left:20px;right:5px;height:18px;bottom:8px;background:#130f2e35;border-radius:50%;filter:blur(9px);transform:rotate(-10deg)}
+.envelope-model{position:absolute;width:107px;height:78px;left:19px;top:58px;transform:rotateX(-12deg) rotateY(-24deg) rotateZ(10deg);transform-style:preserve-3d;transition:transform .65s}
+.envelope-back{position:absolute;inset:0;background:#8166b2;border-radius:7px;transform:translateZ(-4px);box-shadow:4px 6px 0 #624989}
+.envelope-front{position:absolute;inset:0;border-radius:6px;background:linear-gradient(145deg,#e7dafa,#b995e4);clip-path:polygon(0 0,50% 54%,100% 0,100% 100%,0 100%);transform:translateZ(4px)}
+.envelope-flap{position:absolute;inset:0;background:linear-gradient(155deg,#e5d7fb,#b28bdb);clip-path:polygon(0 0,100% 0,50% 58%);transform-origin:top;transform:translateZ(6px);transition:transform .7s}
+.envelope-letter{position:absolute;left:10px;right:10px;top:4px;height:66px;background:#faf6ff;border-radius:4px;padding:12px;transform:translateZ(0);transition:transform .7s;box-shadow:0 2px 5px #36234b20}
+.envelope-letter b{display:block;font:800 11px 'Manrope',sans-serif;letter-spacing:1px;color:#644488}
+.envelope-letter i{display:block;height:3px;margin-top:5px;background:#c4afd9;border-radius:2px}.envelope-letter i:last-child{width:55%}
+.object-orbit{position:absolute;inset:20px 0 18px;border:1px dashed #ab8cce60;border-radius:50%;transform:rotateX(55deg) rotateZ(-30deg)}
+.phone-model{position:absolute;width:62px;height:116px;left:47px;top:16px;border:3px solid #a0d1c7;border-radius:14px;background:#3c6a69;transform:rotateX(14deg) rotateY(-28deg) rotateZ(15deg);transform-style:preserve-3d;box-shadow:6px 5px 0 #2c5155,9px 8px 0 #183d4350;transition:transform .65s}
+.phone-screen{display:flex;flex-direction:column;align-items:center;position:absolute;inset:3px;border-radius:9px;background:linear-gradient(150deg,#d8f8ec,#9fcfc8);color:#255b59;overflow:hidden}
+.phone-speaker{width:19px;height:4px;background:#467774;border-radius:0 0 4px 4px}
+.phone-screen-label{font-size:5px;font-weight:800;letter-spacing:.8px;margin-top:15px}
+.phone-wave{display:flex;gap:3px;height:22px;align-items:center;margin-top:8px}
+.phone-wave i{height:10px;width:3px;border-radius:4px;background:#407c76;transform-origin:center}
+.phone-wave i:nth-child(2),.phone-wave i:nth-child(4){height:17px}.phone-wave i:nth-child(3){height:24px}
+.phone-call-symbol{display:grid;place-items:center;border-radius:50%;background:#356e62;color:#e6fff5;font-size:16px;width:23px;height:23px;margin-top:10px}
+.signal-ring{position:absolute;left:17px;top:20px;width:113px;height:113px;border:1px solid #7fc7b875;border-radius:50%;transform:rotateX(60deg) rotateZ(-15deg)}
+.signal-two{left:4px;top:6px;width:140px;height:140px;opacity:.4}
+@keyframes contact-object-enter{from{opacity:0;translate:0 18px}to{opacity:1;translate:0 0}}
+@keyframes contact-wave{0%,100%{scale:1 .65}50%{scale:1 1.15}}
+@media(prefers-reduced-motion:no-preference){
+ .contact-body.visible .contact-card{animation:contact-arrive .8s .15s backwards}
+ .contact-body.visible .contact-phone{animation-delay:.3s}
+ .contact-body.visible .contact-object{animation:contact-object-enter 1s .45s backwards}
+ .contact-body.visible .phone-wave i{animation:contact-wave 1s .5s 3}
+ .contact-body.visible .phone-wave i:nth-child(even){animation-delay:.7s}
+ .contact-card:focus-visible .envelope-flap{transform:translateZ(-2px) rotateX(165deg)}
+ .contact-card:focus-visible .envelope-letter{transform:translateY(-35px)}
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .contact-options .contact-card:hover{transform:perspective(1000px) rotateX(var(--contact-rx,0deg)) rotateY(var(--contact-ry,0deg)) translateY(-4px);box-shadow:0 7px 0 #765a9220,0 25px 50px #12101e25}
+ .contact-email:hover .envelope-flap{transform:translateZ(-2px) rotateX(165deg)}
+ .contact-email:hover .envelope-letter{transform:translateY(-35px)}
+ .contact-email:hover .envelope-model{transform:rotateX(0deg) rotateY(-12deg) rotateZ(3deg)}
+ .contact-phone:hover .phone-model{transform:translateY(-10px) rotateX(5deg) rotateY(12deg) rotateZ(-8deg)}
+}
+@media(max-width:1100px) and (min-width:901px){.contact-options .contact-card{padding-right:135px;padding-left:22px}.contact-object{right:0;scale:.85;transform-origin:right center}.contact-detail{font-size:13px}.contact-number{font-size:20px}}
+@media(max-width:900px){.contact-options{grid-template-columns:1fr}.contact-options .contact-card{padding-right:190px}.contact-object{right:30px}}
+@media(max-width:420px){.contact-options .contact-card{padding:24px 112px 24px 20px;min-height:230px}.contact-object{right:-4px;top:35px;scale:.7;transform-origin:right top}.contact-card strong{font-size:25px}.contact-detail{font-size:12px}.contact-number{font-size:18px;letter-spacing:.3px}.contact-card-note{font-size:9px}.contact-card-top{font-size:7px}}
+@media(prefers-reduced-motion:reduce){.contact-options .contact-card{transform:none}.contact-object *{transition:none}}

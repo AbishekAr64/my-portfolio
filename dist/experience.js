@@ -111,3 +111,34 @@
     opener?.focus({ preventScroll: true });
   });
 })();
+
+// Fine-pointer parallax; one paint per frame and a still version for reduced motion.
+(() => {
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  document.querySelectorAll('.contact-card').forEach(card => {
+    let frame = 0;
+    function reset() {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      ['--contact-rx','--contact-ry','--contact-x','--contact-y'].forEach(name => card.style.removeProperty(name));
+    }
+    card.addEventListener('pointermove', event => {
+      if (reduced.matches || !fine.matches) return;
+      const bounds = card.getBoundingClientRect();
+      const x = Math.max(0, Math.min(1, (event.clientX-bounds.left)/bounds.width));
+      const y = Math.max(0, Math.min(1, (event.clientY-bounds.top)/bounds.height));
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        card.style.setProperty('--contact-rx', ((.5-y)*9)+'deg');
+        card.style.setProperty('--contact-ry', ((x-.5)*11)+'deg');
+        card.style.setProperty('--contact-x', (x*100)+'%');
+        card.style.setProperty('--contact-y', (y*100)+'%');
+      });
+    });
+    card.addEventListener('pointerleave', reset);
+    card.addEventListener('pointercancel', reset);
+    reduced.addEventListener('change', reset);
+    fine.addEventListener('change', reset);
+  });
+})();
