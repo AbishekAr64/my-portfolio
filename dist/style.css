@@ -369,3 +369,44 @@ html[data-theme=light] .hero .availability:before{background:linear-gradient(110
 @media(hover:hover) and (prefers-reduced-motion:no-preference){.rail-video:hover .rail-play{transform:scale(1.12) rotate(-8deg);box-shadow:0 0 0 7px #b9a0ff22}.video-cv-inline:hover{border-color:var(--accent)}}
 @media(max-height:640px){.rail-video-note{display:none}.side-rail{gap:14px;padding-block:15px}.rail-thread{max-height:70px}}
 @media(max-width:760px){.side-rail{display:none}.video-cv-inline{max-width:none}#video-cv-dialog{padding:18px;border-radius:16px}.video-cv-header{margin-bottom:18px}}
+
+/* Contact studio: two clear ways to start a conversation. */
+.contact{display:block;padding-block:88px 36px;overflow:hidden}
+.contact-status{display:flex;align-items:center;flex-wrap:wrap;gap:12px;font-size:9px;font-weight:700;letter-spacing:1.3px}
+.contact-beacon{position:relative;width:7px;height:7px;flex-shrink:0;border-radius:50%;background:#397e5c;box-shadow:0 0 0 5px #397e5c12}
+.contact-status-line{height:1px;width:35px;background:currentColor;opacity:.3}
+.contact-body{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(30px,5vw,80px);margin:50px 0 55px;align-items:center}
+.contact .contact-message h2{font-size:clamp(42px,4.8vw,76px);line-height:1.08;letter-spacing:-.055em;margin:0;grid-area:auto;font-weight:600}
+.contact .contact-message h2 em{display:block;font-family:Georgia,serif;font-weight:400;font-style:italic;line-height:1.14;margin-top:8px;color:#67477e}
+.contact .contact-message>p{margin:26px 0 0;font-size:15px;line-height:1.9;max-width:440px}
+.contact-signature{display:flex;align-items:center;gap:16px;margin-top:34px;font-size:12px}
+.contact-signature small{display:block;font-size:8px;letter-spacing:1.8px;margin-top:6px;opacity:.7}
+.contact-spark{font-size:43px;color:#67477e;line-height:1;transition:rotate .7s}
+.contact-options{display:grid;grid-template-columns:1fr;gap:14px}
+.contact-card{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;padding:24px 27px;border:1px solid #72568c40;border-radius:18px;background:linear-gradient(125deg,#fff9 0%,#fff3 100%);transition:transform .35s,border-color .35s,box-shadow .35s}
+.contact-card::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 90% 10%,#b9a0ff40,transparent 65%);opacity:0;transition:opacity .4s;pointer-events:none}
+.contact-card-top{display:flex;align-items:center;gap:12px;font-size:8px;font-weight:600;letter-spacing:1.3px;margin-bottom:14px}
+.contact-card-icon{display:grid;place-items:center;width:32px;height:32px;border:1px solid #72568c30;border-radius:10px;font-size:19px}
+.contact-card-arrow{display:grid;place-items:center;margin-left:auto;width:30px;height:30px;border-radius:50%;font-size:20px;transition:transform .4s,background .4s}
+.contact-card strong{font-family:'Manrope',sans-serif;font-size:28px;font-weight:650;letter-spacing:-1px;line-height:1.2}
+.contact-detail{display:block;font-size:15px;margin-top:10px;overflow-wrap:anywhere}
+.contact-number{font-size:23px;font-weight:500;letter-spacing:1px;font-variant-numeric:tabular-nums}
+.contact-card-note{display:block;margin-top:13px;font-size:10px;opacity:.75}
+.contact-bottom{display:flex;justify-content:space-between;align-items:center;gap:24px;border-top:1px solid #72568c40;padding-top:24px}
+.contact-bottom>span{font-size:8px;letter-spacing:1.3px}.contact-bottom>span>span{margin-left:10px}
+.contact-socials{display:flex;gap:25px;flex-wrap:wrap}
+.contact-socials a{display:flex;align-items:center;gap:10px;font-size:12px}
+.social-monogram{display:grid;place-items:center;width:28px;height:28px;border:1px solid #72568c40;border-radius:8px;font-size:11px;font-weight:700}
+.contact-socials a>span:last-child{transition:translate .3s}
+html:not([data-theme=light]) .contact .contact-message h2 em{color:#d7c2f5}
+html:not([data-theme=light]) .contact-spark{color:#c9b4ec}
+html:not([data-theme=light]) .contact-beacon{background:#a6e1c9;box-shadow:0 0 0 5px #a6e1c912}
+html:not([data-theme=light]) .contact-card{background:linear-gradient(120deg,#ffffff0d,#171d2c45);border-color:#d4c1f036}
+html:not([data-theme=light]) .contact-phone::before{background:radial-gradient(ellipse at 90% 10%,#93d9ca30,transparent 65%)}
+html:not([data-theme=light]) :is(.contact-card-icon,.contact-bottom,.social-monogram){border-color:#d4c1f036}
+@keyframes contact-arrive{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes contact-signal{0%,100%{box-shadow:0 0 0 5px #93d9ca12}50%{box-shadow:0 0 0 10px #93d9ca00}}
+@media(prefers-reduced-motion:no-preference){.contact-body.visible .contact-card{animation:contact-arrive .8s .15s both}.contact-body.visible .contact-phone{animation-delay:.3s}.contact-status.visible .contact-beacon{animation:contact-signal 1.5s 2}}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){.contact-card:hover{transform:translateY(-4px);border-color:#a487c4;box-shadow:0 15px 40px #21152e18}.contact-card:hover::before{opacity:1}.contact-card:hover .contact-card-arrow{transform:rotate(45deg);background:#b9a0ff20}.contact-message:hover .contact-spark{rotate:90deg}.contact-socials a:hover>span:last-child{translate:3px -3px}}
+@media(max-width:900px){.contact-body{grid-template-columns:1fr;gap:34px}.contact-options{grid-template-columns:1fr 1fr}.contact .contact-message h2{font-size:clamp(42px,7vw,65px)}}
+@media(max-width:600px){.contact{padding-block:60px 28px}.contact-status{font-size:8px;letter-spacing:.7px;gap:8px}.contact-status-line{width:18px}.contact-body{margin-block:34px}.contact-options{grid-template-columns:1fr}.contact-card{padding:22px}.contact-bottom{align-items:start;flex-direction:column;gap:22px}.contact .contact-message h2{font-size:clamp(38px,9vw,54px)}.contact .contact-message>p{font-size:14px}}
