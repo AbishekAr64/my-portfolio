@@ -299,10 +299,17 @@ html:not([data-theme=light]) .certificate-filters button[aria-pressed=true]{back
 html:not([data-theme=light]) .archive-more:hover{background:#b9a0ff18}
 html:not([data-theme=light]) .credential-preview{color:var(--ink)}
 
-/* An open, hand-drawn curve replaces the hero word's filled highlight. */
-.hero h1 em,html[data-theme=light] .hero h1 em{position:relative;padding:0 .035em .07em;background:none;border-radius:0;box-shadow:none;color:var(--hero-ink);transform:none;animation:none}
-.possibilities-underline{position:absolute;left:0;bottom:-.1em;width:100%;height:.28em;overflow:visible;pointer-events:none;color:#c5a5ef}
-.possibilities-underline path{fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;vector-effect:non-scaling-stroke}
-html[data-theme=light] .possibilities-underline{color:#81618e}
-@keyframes underline-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
-@media(prefers-reduced-motion:no-preference){.possibilities-underline path{stroke-dasharray:1;animation:underline-draw 1s .55s cubic-bezier(.22,1,.36,1) both}}
+/* A tapered signature accent, with a shorter offset finishing stroke. */
+.hero h1 em,html[data-theme=light] .hero h1 em{position:relative;padding:0 .035em .09em;background:none;border-radius:0;box-shadow:none;color:var(--hero-ink);transform:none;animation:none}
+.possibilities-underline{position:absolute;left:-2%;bottom:-.09em;width:104%;height:.33em;overflow:visible;pointer-events:none}
+.possibilities-underline .ink-start{stop-color:#c7abf5}
+.possibilities-underline .ink-end{stop-color:#98dbd0}
+.possibilities-underline path{fill:url(#signature-ink);stroke:none;transform-origin:left center}
+.possibilities-underline .signature-echo{opacity:.65}
+html[data-theme=light] .possibilities-underline .ink-start{stop-color:#78539b}
+html[data-theme=light] .possibilities-underline .ink-end{stop-color:#397d78}
+@keyframes signature-write{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@media(prefers-reduced-motion:no-preference){
+ .signature-main{animation:signature-write .85s .45s cubic-bezier(.22,1,.36,1) both}
+ .signature-echo{animation:signature-write .6s .95s cubic-bezier(.22,1,.36,1) both}
+}
