@@ -576,3 +576,19 @@ html:not([data-theme=light]) .route-live-dot{background:#a5dec5}
 @media(max-width:600px){.contact-route{min-height:108px;padding-right:90px;gap:12px}.route-title{font-size:26px;letter-spacing:-1px}.route-detail{font-size:10px}.route-sculpture{right:12px;scale:.8;transform-origin:right center}.route-arrow{font-size:23px}.route-index{font-size:8px}}
 @media(max-width:380px){.route-title{font-size:23px}.contact-route{padding-right:75px}.route-sculpture{right:8px;scale:.65}.route-detail{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.route-sculpture{transform:none}.route-title>span,.sculpture-object,.route-arrow{transition:none}.contact-route::before,.contact-route::after{transition:none}}
+
+/* Section-to-section movement leaves native scrolling and sticky layouts intact. */
+.section-flow{position:relative;isolation:isolate}
+.section-flow-light{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:-1}
+.section-flow-light::before{content:"";position:absolute;left:0;right:0;top:0;height:260px;background:radial-gradient(ellipse at 55% 0%,#bda1ef27,transparent 70%);opacity:.25;transform:translateY(var(--flow-offset,0px));transition:opacity 1s}
+html[data-theme=light] .section-flow-light::before{background:radial-gradient(ellipse at 55% 0%,#9474ba18,transparent 70%)}
+.section-flow-light::after{content:"";position:absolute;left:8%;right:8%;top:0;height:1px;background:linear-gradient(90deg,transparent,#b9a0ff65,#93d9ca60,transparent);transform:scaleX(.2);opacity:0;transition:transform 1.2s cubic-bezier(.22,1,.36,1),opacity .8s}
+.section-flow.flow-in-view .section-flow-light::before{opacity:1}
+.section-flow.flow-in-view .section-flow-light::after{transform:scaleX(1);opacity:1}
+@keyframes section-heading-arrive{from{opacity:.35;translate:0 22px}to{opacity:1;translate:0 0}}
+@media(prefers-reduced-motion:no-preference){
+ .scroll-reveal{transition:opacity .85s ease var(--reveal-delay,0ms),translate 1s cubic-bezier(.16,1,.3,1) var(--reveal-delay,0ms)}
+ .scroll-reveal.reveal-pending{translate:0 38px}
+ .section-flow.flow-in-view h2{animation:section-heading-arrive .9s cubic-bezier(.16,1,.3,1) both}
+}
+@media(prefers-reduced-motion:reduce){.section-flow-light{display:none}.section-flow.flow-in-view h2{opacity:1;translate:none;animation:none}.scroll-reveal.reveal-pending{opacity:1;translate:none}}

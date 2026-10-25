@@ -1,6 +1,6 @@
 // Content is visible by default; animation is a progressive enhancement.
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-const targets = document.querySelectorAll('.reveal:not(.contact), .contact > *, .hero-copy h1 > span, .about > *, .timeline article, .journey > div:first-child');
+const targets = document.querySelectorAll('.reveal:not(.contact), .contact > *, .hero-copy h1 > span, .about > *, .timeline article, .journey > div:first-child, .certificate-heading, .certificate-intro, .certificate-tools, .archive-meta, .contact-route');
 let revealObserver;
 function configureReveals() {
   revealObserver?.disconnect();
@@ -13,10 +13,10 @@ function configureReveals() {
       entry.target.classList.add('visible');
       revealObserver.unobserve(entry.target);
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
   targets.forEach((el, index) => {
     el.classList.add('scroll-reveal');
-    el.style.setProperty('--reveal-delay', (index % 3) * 85 + 'ms');
+    el.style.setProperty('--reveal-delay', (index % 3) * 100 + 'ms');
     if (!el.classList.contains('visible') && el.getBoundingClientRect().top > 0) {
       el.classList.add('reveal-pending');
       revealObserver.observe(el);

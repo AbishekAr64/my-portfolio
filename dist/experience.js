@@ -172,3 +172,50 @@
     fine.addEventListener('change',reset);
   });
 })();
+
+// Section atmosphere responds to native scrolling; no wheel interception or snapping.
+(() => {
+  if (!('IntersectionObserver' in window)) return;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const sections = [...document.querySelectorAll('main > section[id]:not(#home)')];
+  const active = new Set();
+  let frame = 0;
+  sections.forEach(section => {
+    section.classList.add('section-flow');
+    const light = document.createElement('div');
+    light.className = 'section-flow-light';
+    light.setAttribute('aria-hidden','true');
+    section.append(light);
+  });
+  function paint() {
+    frame = 0;
+    if (reduced.matches) return;
+    active.forEach(section => {
+      const top = section.getBoundingClientRect().top;
+      section.style.setProperty('--flow-offset', Math.max(-30,Math.min(30,top*.045))+'px');
+    });
+  }
+  function schedule() {
+    if (!frame && !reduced.matches) frame = requestAnimationFrame(paint);
+  }
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        active.add(entry.target);
+        entry.target.classList.add('flow-in-view');
+      } else {
+        active.delete(entry.target);
+        entry.target.classList.remove('flow-in-view');
+      }
+    });
+    schedule();
+  }, {rootMargin:'0px 0px -10% 0px',threshold:0});
+  sections.forEach(section => observer.observe(section));
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule);
+  reduced.addEventListener('change',()=>{
+    cancelAnimationFrame(frame);frame=0;
+    sections.forEach(section=>section.style.removeProperty('--flow-offset'));
+    schedule();
+  });
+})();
