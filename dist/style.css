@@ -313,3 +313,29 @@ html[data-theme=light] .possibilities-underline .ink-end{stop-color:#397d78}
  .signature-main{animation:signature-write .85s .45s cubic-bezier(.22,1,.36,1) both}
  .signature-echo{animation:signature-write .6s .95s cubic-bezier(.22,1,.36,1) both}
 }
+
+/* Availability signal: bold lettering, a travelling light and a brief beacon. */
+.hero .availability,html[data-theme=light] .hero .availability{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;gap:11px;padding:11px 15px;border:1px solid #b6e1cb60;border-radius:30px;background:linear-gradient(120deg,#93d9ca1c,#b9a0ff16);color:#e5f8ed;box-shadow:inset 0 1px 0 #ffffff12,0 4px 22px #93d9ca0b;font-size:10px;letter-spacing:1.1px;line-height:1.4;text-decoration:none;transition:border-color .3s,box-shadow .3s,transform .3s}
+.hero .availability strong{font-weight:800;position:relative;z-index:1}
+.hero .availability>i{position:relative;flex-shrink:0;width:7px;height:7px;background:#a9e6bf;box-shadow:0 0 12px #a9e6bf60}
+.hero .availability>i:after{content:"";position:absolute;inset:-4px;border:1px solid currentColor;border-radius:50%;color:#a9e6bf;opacity:0}
+.hero .availability:before{content:"";position:absolute;inset:0;z-index:0;border-radius:inherit;background:linear-gradient(110deg,transparent 25%,#c7f6dc30 48%,#e0d3ff45 50%,transparent 73%);transform:translateX(-125%);pointer-events:none}
+.hero .availability-arrow{font-size:17px;line-height:1;transition:transform .3s;color:#b9ead2}
+html[data-theme=light] .hero .availability{background:linear-gradient(120deg,#e4f1e9,#eee6f5);border-color:#718f7b55;color:#314b40;box-shadow:inset 0 1px 0 #ffffffb0,0 4px 20px #4a65550b}
+html[data-theme=light] .hero .availability>i{background:#39865a;box-shadow:0 0 9px #39865a25}
+html[data-theme=light] .hero .availability>i:after{color:#39865a}
+html[data-theme=light] .hero .availability-arrow{color:#536d60}
+html[data-theme=light] .hero .availability:before{background:linear-gradient(110deg,transparent 25%,#ffffff80 48%,#ffffffc0 50%,transparent 73%)}
+@keyframes availability-sweep{0%,15%{transform:translateX(-125%)}70%,100%{transform:translateX(125%)}}
+@keyframes availability-beacon{0%{transform:scale(.65);opacity:.65}75%,100%{transform:scale(1.8);opacity:0}}
+@media(prefers-reduced-motion:no-preference){
+ .hero .availability:before{animation:availability-sweep 2s .4s 2}
+ .hero .availability>i:after{animation:availability-beacon 1.4s .3s 3}
+ .hero.motion-paused .availability:before,.hero.motion-paused .availability>i:after{animation-play-state:paused}
+}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ .hero .availability:hover{transform:translateY(-2px);border-color:#8ebfa6;box-shadow:0 6px 25px #93d9ca20}
+ .hero .availability:hover .availability-arrow{transform:translate(2px,-2px)}
+}
+@media(max-width:650px){.hero .availability,html[data-theme=light] .hero .availability{font-size:8px;letter-spacing:.6px;gap:8px;padding:9px 11px}.hero .availability-arrow{font-size:14px}}
+@media(max-width:380px){.hero .availability,html[data-theme=light] .hero .availability{max-width:none;font-size:7px;padding:8px;gap:6px}.hero .availability-arrow{display:none}}
