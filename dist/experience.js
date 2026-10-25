@@ -143,23 +143,32 @@
   });
 })();
 
-// Links work without JavaScript; hover/focus adds a shared contact preview.
+
+// Small sculptural movement within each contact row; links remain native.
 (() => {
-  const consolePanel = document.querySelector('.connection-console');
-  if (!consolePanel) return;
-  const keys = [...consolePanel.querySelectorAll('.dock-key')];
-  const destination = consolePanel.querySelector('.console-destination');
-  function show(key) {
-    keys.forEach(item => item.classList.toggle('is-selected', item === key));
-    consolePanel.querySelector('#console-detail').textContent = key.dataset.detail;
-    consolePanel.querySelector('#console-caption').textContent = key.dataset.caption;
-    consolePanel.querySelector('.console-kicker').textContent = key.dataset.kicker;
-    destination.href = key.href;
-    if (key.target) { destination.target = '_blank'; destination.rel = 'noopener noreferrer'; }
-    else { destination.removeAttribute('target'); destination.removeAttribute('rel'); }
-  }
-  keys.forEach(key => {
-    key.addEventListener('pointerenter', () => show(key));
-    key.addEventListener('focus', () => show(key));
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  document.querySelectorAll('.contact-route').forEach(row => {
+    let frame;
+    function reset() {
+      cancelAnimationFrame(frame);
+      row.style.removeProperty('--sculpt-x');
+      row.style.removeProperty('--sculpt-y');
+    }
+    row.addEventListener('pointermove', event => {
+      if(reduced.matches || !fine.matches) return;
+      const r=row.getBoundingClientRect();
+      const x=Math.max(-1,Math.min(1,(event.clientX-r.left)/r.width*2-1));
+      const y=Math.max(-1,Math.min(1,(event.clientY-r.top)/r.height*2-1));
+      cancelAnimationFrame(frame);
+      frame=requestAnimationFrame(()=>{
+        row.style.setProperty('--sculpt-x', x*7+'px');
+        row.style.setProperty('--sculpt-y', y*8+'px');
+      });
+    });
+    row.addEventListener('pointerleave',reset);
+    row.addEventListener('pointercancel',reset);
+    reduced.addEventListener('change',reset);
+    fine.addEventListener('change',reset);
   });
 })();
