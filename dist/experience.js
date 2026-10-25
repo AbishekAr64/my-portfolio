@@ -15,7 +15,7 @@
   syncTheme();
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const fine = matchMedia('(hover: hover) and (pointer: fine)');
-  document.querySelectorAll('.project-art, .credential-preview').forEach(card => {
+  document.querySelectorAll('.project-art, .credential-preview, .about-portrait').forEach(card => {
     card.addEventListener('pointermove', event => {
       if (reduced.matches || !fine.matches) return;
       const rect = card.getBoundingClientRect();
