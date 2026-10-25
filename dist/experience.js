@@ -81,3 +81,33 @@
   new ResizeObserver(schedule).observe(trail);
   updateTrail();
 })();
+
+// Load the YouTube player only when requested, and stop playback on close.
+(() => {
+  const dialog = document.querySelector('#video-cv-dialog');
+  if (!dialog) return;
+  const player = dialog.querySelector('.video-cv-player');
+  let opener;
+  document.querySelectorAll('[data-video-cv]').forEach(button => {
+    button.addEventListener('click', () => {
+      opener = button;
+      const frame = document.createElement('iframe');
+      frame.src = 'https://www.youtube-nocookie.com/embed/gftYGYSTJ_A?rel=0';
+      frame.title = 'Rajenthirakumar Abishek — Portfolio Video CV';
+      frame.allow = 'accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      frame.allowFullscreen = true;
+      frame.referrerPolicy = 'strict-origin-when-cross-origin';
+      player.replaceChildren(frame);
+      dialog.showModal();
+    });
+  });
+  dialog.querySelector('.video-cv-close').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => {
+    const r = dialog.getBoundingClientRect();
+    if (event.target === dialog && (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom)) dialog.close();
+  });
+  dialog.addEventListener('close', () => {
+    player.replaceChildren();
+    opener?.focus({ preventScroll: true });
+  });
+})();
