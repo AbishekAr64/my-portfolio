@@ -494,3 +494,39 @@ html:not([data-theme=light]) .contact-linkedin::before{background:radial-gradien
 @media(max-width:1250px){.contact-body{grid-template-columns:1fr}.contact-options{max-width:760px;width:100%}.contact-options .contact-card{min-height:165px;padding:22px 105px 22px 22px}.contact-options .contact-card-top{position:static;margin-bottom:18px}.contact-options .contact-card strong{margin-top:0}.contact-options .contact-object{top:43px;right:15px;scale:.48}.contact-options .contact-detail{font-size:12px}}
 @media(max-width:650px){.contact-options{grid-template-columns:1fr}.contact-options .contact-card{min-height:142px;padding:20px 110px 20px 20px}.contact-options .contact-card-top{margin-bottom:14px}.contact-options .contact-object{top:31px;right:20px;scale:.48}.contact-options .contact-card strong{font-size:22px}.contact-options .contact-detail{margin-top:7px}.contact-options .contact-number{font-size:18px}}
 @media(max-width:380px){.contact-options .contact-card{padding-right:93px}.contact-options .contact-object{right:12px;scale:.42}}
+
+/* A tactile connection desk replaces the conventional card grid. */
+.contact-body{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(32px,5vw,80px)}
+.contact .contact-message h2{font-size:clamp(40px,4.2vw,65px)}
+.connection-console{--console-ink:#3c3156;--console-muted:#726381;--console-edge:#8d78a73d;position:relative;min-width:0;padding:26px;border:1px solid var(--console-edge);border-radius:26px;background:linear-gradient(140deg,#f7f1ff,#e5dbf1 60%,#d5e2df);color:var(--console-ink);box-shadow:0 8px 0 #9986ad30,0 28px 65px #16102020}
+.console-top,.console-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:8px;letter-spacing:1.4px;color:var(--console-muted)}
+.console-top>span:first-child{display:flex;align-items:center;gap:8px}.console-top i{width:5px;height:5px;border-radius:50%;background:#558d73;box-shadow:0 0 0 4px #558d7312}
+.console-display{padding:29px 0 25px;min-height:143px}
+.console-kicker{display:block;font-size:8px;letter-spacing:1.8px;color:var(--console-muted)}
+.console-destination{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:11px;font-size:clamp(16px,1.6vw,23px);font-family:'Manrope',sans-serif;font-weight:600;letter-spacing:-.6px}
+#console-detail{overflow-wrap:anywhere}.console-destination>span:last-child{color:#83619f;font-size:25px;flex-shrink:0}
+#console-caption{display:block;margin-top:8px;font-size:11px;line-height:1.6;color:var(--console-muted)}
+.connection-dock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:22px 14px 18px;border-radius:20px;background:linear-gradient(180deg,#b7a7cb30,#faf6ff80);border:1px solid #a795be30;box-shadow:inset 0 3px 10px #51415e13;perspective:800px}
+.dock-key{--key-face:#d9b9fa;--key-side:#9a71bc;--key-ink:#67428c;display:flex;flex-direction:column;align-items:center;gap:13px;min-width:0;outline-offset:7px;border-radius:12px}
+.key-phone{--key-face:#b1e5d5;--key-side:#619e8e;--key-ink:#346f60}.key-linkedin{--key-face:#b4d7f6;--key-side:#6696c2;--key-ink:#315f93}.key-github{--key-face:#d0c5ed;--key-side:#8d7bba;--key-ink:#534076}
+.keycap{display:grid;place-items:center;width:100%;max-width:86px;aspect-ratio:1;border:1px solid #ffffff80;border-radius:19px;background:linear-gradient(145deg,#ffffff55,transparent 55%),var(--key-face);box-shadow:0 6px 0 var(--key-side),0 9px 0 color-mix(in srgb,var(--key-side),transparent 60%),0 14px 16px #33213d24,inset 0 2px 0 #ffffff55;transform:rotateX(14deg);transform-origin:center bottom;transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s;color:var(--key-ink)}
+.keycap svg{width:44%;height:44%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 0 #ffffff80)}
+.key-in{font:800 36px Arial,sans-serif;letter-spacing:-2px;text-shadow:0 1px #fff8}.key-code{font:700 25px monospace;letter-spacing:-3px;text-shadow:0 1px #fff8}
+.dock-key strong{font-size:11px;font-weight:600;margin-top:3px}.dock-key small{font-size:6px;letter-spacing:1.1px;margin-top:-8px;color:var(--console-muted)}
+.dock-key.is-selected strong{color:var(--key-ink)}
+.console-foot{border-top:1px solid var(--console-edge);margin-top:24px;padding-top:17px;font-size:7px;letter-spacing:.7px}.console-foot a{font-size:11px;letter-spacing:.5px;color:var(--console-ink)}
+html:not([data-theme=light]) .connection-console{--console-ink:#f1eafb;--console-muted:#bdb0d0;--console-edge:#d2b9ef26;background:linear-gradient(135deg,#40364f,#29283d 65%,#293d42);box-shadow:0 8px 0 #17142670,0 30px 70px #100c252b}
+html:not([data-theme=light]) .connection-dock{background:linear-gradient(180deg,#18162580,#c5a3e508);border-color:#d2b9ef1a;box-shadow:inset 0 4px 16px #12101c50}
+html:not([data-theme=light]) .dock-key.is-selected strong{color:var(--key-face)}
+html:not([data-theme=light]) .console-destination>span:last-child{color:#cbb2ed}
+@keyframes key-arrive{from{opacity:0;transform:translateY(14px) rotateX(35deg)}to{opacity:1;transform:translateY(0) rotateX(14deg)}}
+@media(prefers-reduced-motion:no-preference){
+ .contact-body.visible .keycap{animation:key-arrive .75s .15s backwards}
+ .contact-body.visible .key-phone .keycap{animation-delay:.25s}.contact-body.visible .key-linkedin .keycap{animation-delay:.35s}.contact-body.visible .key-github .keycap{animation-delay:.45s}
+ .dock-key:focus-visible .keycap{transform:translateY(-8px) rotateX(0deg) rotateZ(-3deg)}
+ .dock-key:active .keycap{transform:translateY(5px) rotateX(5deg);box-shadow:0 1px 0 var(--key-side),0 4px 8px #33213d20}
+}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){.dock-key:hover .keycap{transform:translateY(-9px) rotateX(-5deg) rotateZ(-4deg);box-shadow:0 8px 0 var(--key-side),0 20px 24px #33213d30}.key-phone:hover .keycap,.key-github:hover .keycap{rotate:7deg}}
+@media(max-width:1100px){.contact-body{grid-template-columns:1fr}.connection-console{max-width:650px;width:100%}.console-destination{font-size:22px}}
+@media(max-width:600px){.connection-console{padding:20px;border-radius:22px}.connection-dock{gap:10px;padding:18px 10px}.keycap{border-radius:14px}.key-in{font-size:28px}.key-code{font-size:20px}.dock-key strong{font-size:10px}.dock-key small{font-size:5px;letter-spacing:.6px}.console-destination{font-size:17px}.console-foot{flex-wrap:wrap;gap:12px}.console-top{font-size:7px;letter-spacing:.8px}}
+@media(max-width:360px){.connection-console{padding:15px}.connection-dock{gap:8px;padding-inline:8px}.dock-key small{display:none}}

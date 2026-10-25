@@ -142,3 +142,24 @@
     fine.addEventListener('change', reset);
   });
 })();
+
+// Links work without JavaScript; hover/focus adds a shared contact preview.
+(() => {
+  const consolePanel = document.querySelector('.connection-console');
+  if (!consolePanel) return;
+  const keys = [...consolePanel.querySelectorAll('.dock-key')];
+  const destination = consolePanel.querySelector('.console-destination');
+  function show(key) {
+    keys.forEach(item => item.classList.toggle('is-selected', item === key));
+    consolePanel.querySelector('#console-detail').textContent = key.dataset.detail;
+    consolePanel.querySelector('#console-caption').textContent = key.dataset.caption;
+    consolePanel.querySelector('.console-kicker').textContent = key.dataset.kicker;
+    destination.href = key.href;
+    if (key.target) { destination.target = '_blank'; destination.rel = 'noopener noreferrer'; }
+    else { destination.removeAttribute('target'); destination.removeAttribute('rel'); }
+  }
+  keys.forEach(key => {
+    key.addEventListener('pointerenter', () => show(key));
+    key.addEventListener('focus', () => show(key));
+  });
+})();
