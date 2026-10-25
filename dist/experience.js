@@ -59,3 +59,25 @@
   });
   contact.addEventListener('pointerleave',reset);contact.addEventListener('blur',reset);reduce.addEventListener('change',reset);
 })();
+
+// The journey line fills with reading progress; no animation loop while idle.
+(() => {
+  const trail = document.querySelector('.learning-trail');
+  if (!trail) return;
+  const preference = matchMedia('(prefers-reduced-motion: reduce)');
+  let scheduled = false;
+  function updateTrail() {
+    scheduled = false;
+    const rect = trail.getBoundingClientRect();
+    const progress = preference.matches ? 1 : Math.max(0, Math.min(1, (innerHeight * .65 - rect.top) / Math.max(1, rect.height - 45)));
+    trail.style.setProperty('--trail-progress', progress.toFixed(3));
+  }
+  function schedule() {
+    if (!scheduled) { scheduled = true; requestAnimationFrame(updateTrail); }
+  }
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule);
+  preference.addEventListener('change', schedule);
+  new ResizeObserver(schedule).observe(trail);
+  updateTrail();
+})();
