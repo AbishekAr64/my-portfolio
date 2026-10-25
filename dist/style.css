@@ -463,15 +463,15 @@ html:not([data-theme=light]) :is(.contact-card-icon,.contact-bottom,.social-mono
 
 /* Four contact destinations, each with its own dimensional object. */
 .contact-body{grid-template-columns:minmax(0,.85fr) minmax(0,1.35fr);gap:40px}
-.contact-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.contact-options .contact-card{padding:25px 24px 30px;min-height:335px;justify-content:flex-end}
-.contact-options .contact-card-top{position:absolute;top:22px;left:24px;right:24px;margin:0;font-size:7px;letter-spacing:1px}
-.contact-options .contact-card-arrow{top:auto;bottom:auto;right:0;translate:0 265px}
-.contact-options .contact-object{top:35px;right:22px;scale:.65;transform-origin:right top}
-.contact-options .contact-card strong{margin-top:142px;font-size:26px}
+.contact-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.contact-options .contact-card{padding:20px;min-height:200px;justify-content:flex-end;border-radius:16px}
+.contact-options .contact-card-top{position:static;margin:0 0 auto;font-size:7px;letter-spacing:1px}
+.contact-options .contact-card-arrow{top:14px;bottom:auto;right:14px;translate:none;width:23px;height:23px;font-size:15px;border:0;background:transparent}
+.contact-options .contact-object{top:32px;right:18px;scale:.43;transform-origin:right top}
+.contact-options .contact-card strong{margin-top:65px;font-size:22px;letter-spacing:-.6px}
 .contact-options .contact-detail{font-size:13px;line-height:1.6}
-.contact-options .contact-number{font-size:21px}
-.contact-options .contact-card-note{font-size:10px;max-width:calc(100% - 22px);line-height:1.7}
+.contact-options .contact-number{font-size:18px;letter-spacing:.5px}
+.contact-options .contact-card-note{display:none}
 .network-model{position:absolute;top:33px;left:26px;width:95px;height:95px;transform:rotateX(12deg) rotateY(-24deg) rotateZ(9deg);transform-style:preserve-3d;transition:transform .6s}
 .network-tile{position:absolute;inset:8px;display:grid;place-items:center;padding-bottom:5px;border:2px solid #a5d6ff;border-radius:16px;background:linear-gradient(140deg,#76b9f0,#23699d);color:white;font:800 48px Arial,sans-serif;box-shadow:6px 5px 0 #20517c,9px 8px 0 #1b355650}
 .network-node{position:absolute;width:14px;height:14px;border-radius:50%;background:#a5d6ff;box-shadow:3px 3px 0 #326a98;transition:translate .5s}
@@ -490,7 +490,7 @@ html:not([data-theme=light]) .contact-linkedin::before{background:radial-gradien
  .contact-linkedin:hover .node-one{translate:-5px -5px}.contact-linkedin:hover .node-two{translate:5px 5px}
  .contact-github:hover .code-model{transform:translateY(-8px) rotateX(-8deg) rotateY(12deg) rotateZ(3deg)}
 }
-@media(max-width:1250px){.contact-body{grid-template-columns:1fr}.contact-options .contact-card{min-height:250px;padding:28px 165px 28px 28px;justify-content:center}.contact-options .contact-card-top{position:static;margin-bottom:24px}.contact-options .contact-card-arrow{right:20px;bottom:20px;translate:none}.contact-options .contact-card strong{margin-top:0}.contact-options .contact-object{top:40px;right:10px;scale:.85}.contact-options .contact-card-note{max-width:none}}
-@media(max-width:1000px){.contact-options .contact-card{padding-right:120px;padding-left:22px}.contact-options .contact-object{right:0;scale:.65}.contact-options .contact-detail{font-size:12px}.contact-options .contact-number{font-size:19px}}
-@media(max-width:650px){.contact-options{grid-template-columns:1fr}.contact-options .contact-card{min-height:235px;padding:25px 150px 25px 24px}.contact-options .contact-object{right:12px;scale:.85}}
-@media(max-width:380px){.contact-options .contact-card{padding-right:110px;padding-left:20px}.contact-options .contact-object{right:0;scale:.65}.contact-options .contact-card strong{font-size:24px}.contact-options .contact-number{font-size:18px}}
+/* Compact contact tiles retain their artwork without dominating the section. */
+@media(max-width:1250px){.contact-body{grid-template-columns:1fr}.contact-options{max-width:760px;width:100%}.contact-options .contact-card{min-height:165px;padding:22px 105px 22px 22px}.contact-options .contact-card-top{position:static;margin-bottom:18px}.contact-options .contact-card strong{margin-top:0}.contact-options .contact-object{top:43px;right:15px;scale:.48}.contact-options .contact-detail{font-size:12px}}
+@media(max-width:650px){.contact-options{grid-template-columns:1fr}.contact-options .contact-card{min-height:142px;padding:20px 110px 20px 20px}.contact-options .contact-card-top{margin-bottom:14px}.contact-options .contact-object{top:31px;right:20px;scale:.48}.contact-options .contact-card strong{font-size:22px}.contact-options .contact-detail{margin-top:7px}.contact-options .contact-number{font-size:18px}}
+@media(max-width:380px){.contact-options .contact-card{padding-right:93px}.contact-options .contact-object{right:12px;scale:.42}}
