@@ -298,3 +298,11 @@ html:not([data-theme=light]) :is(.certificate-filters button,.archive-meta,.arch
 html:not([data-theme=light]) .certificate-filters button[aria-pressed=true]{background:var(--accent);color:var(--ink);border-color:var(--accent)}
 html:not([data-theme=light]) .archive-more:hover{background:#b9a0ff18}
 html:not([data-theme=light]) .credential-preview{color:var(--ink)}
+
+/* An open, hand-drawn curve replaces the hero word's filled highlight. */
+.hero h1 em,html[data-theme=light] .hero h1 em{position:relative;padding:0 .035em .07em;background:none;border-radius:0;box-shadow:none;color:var(--hero-ink);transform:none;animation:none}
+.possibilities-underline{position:absolute;left:0;bottom:-.1em;width:100%;height:.28em;overflow:visible;pointer-events:none;color:#c5a5ef}
+.possibilities-underline path{fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;vector-effect:non-scaling-stroke}
+html[data-theme=light] .possibilities-underline{color:#81618e}
+@keyframes underline-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@media(prefers-reduced-motion:no-preference){.possibilities-underline path{stroke-dasharray:1;animation:underline-draw 1s .55s cubic-bezier(.22,1,.36,1) both}}
