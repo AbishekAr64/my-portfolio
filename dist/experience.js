@@ -219,3 +219,23 @@
     schedule();
   });
 })();
+
+// The sidebar follows the chapter at the reading line, using native anchor links.
+(() => {
+  const stops = [...document.querySelectorAll('.rail-stop')];
+  const chapters = stops.map(link => document.querySelector(link.hash));
+  const count = document.querySelector('.rail-reading b');
+  let queued = false;
+  function update() {
+    queued = false;
+    let active = 0;
+    chapters.forEach((section, index) => { if (section.getBoundingClientRect().top <= innerHeight * .45) active = index; });
+    stops.forEach((link, index) => { if (index === active) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current'); });
+    count.textContent = String(active + 1).padStart(2, '0');
+  }
+  function schedule() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule);
+  update();
+})();

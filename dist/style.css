@@ -631,3 +631,44 @@ input,select{font:inherit}dialog{overscroll-behavior:contain}body:has(dialog[ope
 /* Keep supporting contact text readable on narrow screens. */
 .route-detail{opacity:1;font-size:12px}
 @media(max-width:650px){.route-detail{font-size:12px}.scene-caption,#scene-motion{font-size:9px}}
+/* Introduction kit: paired editorial tiles with small kinetic illustrations. */
+.cv-actions{grid-template-columns:1fr 1fr;gap:12px;max-width:540px}
+.cv-kit-heading{grid-column:1/-1;display:flex;justify-content:space-between;font-size:9px;letter-spacing:1.8px;color:var(--muted);padding-bottom:4px}
+.cv-actions .cv-tile{display:flex;flex-direction:column;align-items:stretch;gap:0;position:relative;overflow:hidden;isolation:isolate;padding:20px;border-radius:6px 24px 6px 24px;text-align:left;background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 12%,var(--bg)),var(--bg));border:1px solid var(--line);color:var(--text);min-width:0;transform:none;transition:transform .4s var(--motion-ease),border-color .4s,box-shadow .4s}
+.cv-actions .cv-download{background:linear-gradient(145deg,color-mix(in srgb,#90caba 13%,var(--bg)),var(--bg));border-radius:24px 6px 24px 6px}
+.cv-actions .cv-tile-top{display:flex;justify-content:space-between;align-items:center;width:auto;height:auto;min-height:0;background:none;border-radius:0;color:var(--muted);font-size:9px;letter-spacing:1.5px}
+.cv-tile-top>span:last-child{font-size:19px;color:var(--accent);transition:rotate .4s}
+.cv-actions .cv-tile-copy{margin:0;color:var(--text)}
+.cv-actions .cv-tile-copy strong{font:600 clamp(16px,1.5vw,21px)/1.3 'Manrope',sans-serif;letter-spacing:-.5px}
+.cv-actions .cv-tile-copy small{color:var(--muted);font-size:11px;margin-top:12px;display:flex;align-items:center;gap:8px}
+.cv-tile-copy small:before{content:'';width:16px;height:1px;background:var(--accent);transition:width .4s}
+.cv-art{height:104px;display:grid;place-items:center;position:relative;perspective:500px}
+.cv-play{width:46px;height:46px;display:grid;place-items:center;padding-left:3px;border-radius:50%;background:var(--accent);color:var(--bg);box-shadow:0 9px 24px #0002;transition:transform .5s var(--motion-ease)}
+.cv-orbit{position:absolute;width:84px;height:64px;border:1px solid var(--line);border-radius:50%;rotate:-30deg;transition:rotate .7s}.cv-orbit:after{content:'';position:absolute;top:7px;left:6px;width:6px;height:6px;background:var(--accent);border-radius:50%}
+.cv-wave{position:absolute;bottom:12px;display:flex;align-items:center;gap:3px;height:12px}.cv-wave i{height:4px;width:2px;background:var(--accent)}.cv-wave i:nth-child(2n){height:10px}.cv-wave i:nth-child(3){height:14px}
+.cv-paper{position:relative;width:48px;height:60px;border:1px solid var(--accent);border-radius:5px;background:color-mix(in srgb,var(--accent) 10%,var(--bg));transform:rotate(-9deg) rotateY(-16deg);box-shadow:6px 5px 0 color-mix(in srgb,var(--accent) 15%,transparent);padding:13px 9px;transition:transform .5s var(--motion-ease)}
+.cv-paper i{display:block;height:2px;margin-bottom:5px;background:var(--muted);opacity:.5}.cv-paper i:nth-child(2){width:70%}.cv-paper b{position:absolute;right:-11px;bottom:-7px;background:var(--accent);color:var(--bg);width:26px;height:26px;border-radius:50%;text-align:center;font-size:18px;transition:translate .4s}
+.cv-kit-note{grid-column:1/-1!important;color:var(--muted)!important;font-size:11px!important;margin:0!important;padding-top:3px}
+.cv-tile:is(:hover,:focus-visible){transform:translateY(-4px);border-color:var(--accent);box-shadow:0 14px 30px #0001}
+.cv-tile:is(:hover,:focus-visible) .cv-orbit{rotate:30deg}.cv-tile:is(:hover,:focus-visible) .cv-play{transform:scale(1.08)}
+.cv-tile:is(:hover,:focus-visible) .cv-paper{transform:rotate(5deg) rotateY(12deg) translateY(-3px)}.cv-tile:is(:hover,:focus-visible) .cv-paper b{translate:0 4px}
+.cv-tile:is(:hover,:focus-visible) small:before{width:26px}.cv-tile:is(:hover,:focus-visible) .cv-tile-top>span:last-child{rotate:45deg}
+@keyframes cv-wave{50%{transform:scaleY(.4)}}
+@media(prefers-reduced-motion:no-preference){.cv-tile:is(:hover,:focus-visible) .cv-wave i{animation:cv-wave .6s ease-in-out 3 alternate}.cv-wave i:nth-child(2n){animation-delay:.15s!important}}
+/* A slim chapter compass replaces the duplicate sidebar video control. */
+.rail-explorer{position:relative;display:flex;flex-direction:column;align-items:center;writing-mode:horizontal-tb;padding-block:12px;gap:2px}
+.rail-track{position:absolute;top:34px;bottom:34px;width:1px;background:var(--line);pointer-events:none}
+.rail-stop{position:relative;display:grid;place-items:center;width:44px;height:44px;color:var(--accent)}
+.rail-stop-dot{width:5px;height:5px;background:var(--muted);border-radius:50%;box-shadow:0 0 0 5px var(--bg);transition:scale .4s,background .4s,box-shadow .4s}
+.rail-stop[aria-current] .rail-stop-dot{background:var(--accent);scale:1.4;box-shadow:0 0 0 5px var(--bg),0 0 0 6px var(--accent)}
+.rail-stop-label{position:absolute;left:48px;white-space:nowrap;pointer-events:none;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text);font-size:10px;letter-spacing:1px;opacity:0;transform:translateX(-6px);transition:opacity .2s,transform .2s;box-shadow:0 8px 24px #0002}
+.rail-stop:is(:hover,:focus-visible) .rail-stop-label{opacity:1;transform:none}
+.rail-stop:hover .rail-stop-dot{background:var(--accent);scale:1.5}
+.side-rail .rail-reading{font-size:8px;letter-spacing:2px;writing-mode:vertical-rl;rotate:180deg;color:var(--muted)}.rail-reading b{color:var(--accent)}
+.rail-monogram{transition:rotate .5s var(--motion-ease),border-radius .5s}.rail-brand:hover .rail-monogram{rotate:-8deg;border-radius:50%}
+@media(max-height:740px){.side-rail{gap:8px;padding-block:16px}.rail-name{display:none}.rail-explorer{padding-block:0}.side-rail .rail-reading{display:none}}
+@media(max-width:1000px) and (min-width:761px){.cv-actions .cv-tile{padding:15px}.cv-actions .cv-tile-copy strong{font-size:15px}}
+@media(max-width:380px){.cv-actions{gap:8px}.cv-actions .cv-tile{padding:14px 12px}.cv-actions .cv-tile-copy strong{font-size:15px}.cv-actions .cv-tile-copy small{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.cv-tile:is(:hover,:focus-visible),.cv-tile:is(:hover,:focus-visible) .cv-play{transform:none}.cv-tile:is(:hover,:focus-visible) .cv-orbit{rotate:-30deg}.cv-tile:is(:hover,:focus-visible) .cv-paper{transform:rotate(-9deg) rotateY(-16deg)}.cv-tile:is(:hover,:focus-visible) .cv-paper b{translate:none}.rail-brand:hover .rail-monogram{rotate:0}}
+.cv-actions .cv-download>.cv-tile-top{display:flex;justify-content:space-between;width:100%;height:auto;background:none;border-radius:0;font-size:9px;color:var(--muted);flex-shrink:1}
+.cv-actions .video-cv-inline>.cv-tile-copy{margin-left:0;color:var(--text)}
