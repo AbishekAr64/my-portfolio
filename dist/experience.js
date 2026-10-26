@@ -239,3 +239,32 @@
   addEventListener('load', schedule);
   update();
 })();
+
+// Match the fixed chrome to the section just below the header, including Skills.
+(() => {
+  const sections = [...document.querySelectorAll('main > section[id]')];
+  const chrome = [...document.querySelectorAll('header,.side-rail,.progress')];
+  const header = document.querySelector('header');
+  let queued = false;
+  let previous = '';
+  function update() {
+    queued = false;
+    let active = sections[0];
+    const readingLine = header.getBoundingClientRect().bottom + 80;
+    sections.forEach(section => { if (section.getBoundingClientRect().top <= readingLine) active = section; });
+    const key = active.id + document.documentElement.dataset.theme;
+    if (previous === key) return;
+    previous = key;
+    const palette = getComputedStyle(active);
+    chrome.forEach(element => {
+      ['bg','accent','muted','line'].forEach(name => element.style.setProperty('--chrome-' + name, palette.getPropertyValue('--' + name).trim()));
+      element.dataset.chapter = active.id;
+    });
+  }
+  function schedule() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule);
+  new MutationObserver(schedule).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  update();
+})();
