@@ -122,7 +122,15 @@ const frameWidth = agentCanvas.width;
 const frameHeight = agentCanvas.height;
 const visited = new Uint8Array(frameWidth * frameHeight);
 const queue = new Int32Array(frameWidth * frameHeight);
-let agentPausedByUser = false;
+let agentPausedByUser = matchMedia('(max-width: 650px)').matches;
+let agentReady = false;
+function loadAgent() {
+  if (agentReady) return;
+  const source = agentSource.querySelector('source');
+  source.src = source.dataset.src;
+  agentSource.load();
+  agentReady = true;
+}
 let agentFrameRequest = null;
 function drawAgentFrame() {
   if (agentSource.readyState < 2) return;
@@ -185,7 +193,7 @@ function syncAgentControl() {
 }
 function applyAgentMotion() {
   if (agentPausedByUser || motionPreference.matches || document.hidden) agentSource.pause();
-  else agentSource.play().catch(syncAgentControl);
+  else { loadAgent(); agentSource.play().catch(syncAgentControl); }
   syncAgentControl();
 }
 agentCharacter.addEventListener('click', () => {
@@ -199,4 +207,5 @@ agentSource.addEventListener('play', () => { stopAgentFrames(); renderAgentFrame
 agentSource.addEventListener('pause', () => { stopAgentFrames(); syncAgentControl(); });
 motionPreference.addEventListener('change', applyAgentMotion);
 document.addEventListener('visibilitychange', applyAgentMotion);
-applyAgentMotion();
+if ('requestIdleCallback' in window) requestIdleCallback(applyAgentMotion, { timeout: 2500 });
+else setTimeout(applyAgentMotion, 1200);
