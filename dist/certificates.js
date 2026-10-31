@@ -10,12 +10,12 @@ const certificateData = [{"title": "Google Data Analytics", "issuer": "Google", 
   function updateArchive() {
     const query = search.value.trim().toLowerCase();
     const matches = cards.filter(card => (category === 'All' || card.dataset.category === category) && card.dataset.search.includes(query));
-    const limit = expanded || query || category !== 'All' ? matches.length : 3;
+    const limit = expanded ? matches.length : 8;
     cards.forEach(card => { card.hidden = true; });
     matches.slice(0, limit).forEach(card => { card.hidden = false; });
     count.textContent = `Showing ${Math.min(limit, matches.length)} of ${matches.length} certificates`;
     document.querySelector('#certificate-empty').hidden = matches.length !== 0;
-    more.hidden = matches.length <= 3 || Boolean(query) || category !== 'All';
+    more.hidden = matches.length <= 8;
     more.setAttribute('aria-expanded', String(expanded));
     more.firstChild.textContent = expanded ? 'Show fewer certificates ' : `Explore all ${matches.length} certificates `;
     more.querySelector('span').textContent = expanded ? '↑' : '↓';
