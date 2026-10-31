@@ -773,3 +773,25 @@ header .nav-contact{transform:none!important}
 header .theme-toggle:hover{rotate:0deg}
 @media(max-width:900px){.tool-strip .tool-group{grid-template-columns:repeat(3,minmax(0,1fr))}.tool-strip .tool-token{justify-content:flex-start}.hero .data-scene{max-width:680px}}
 @media(max-width:650px){.hero-editorial{padding-top:28px}.hero .data-scene{max-width:360px}.hero #data-canvas{aspect-ratio:1/1}.hero .scene-labels{display:none}.hero-actions{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:20px}.tool-strip .tool-group{grid-template-columns:repeat(2,minmax(0,1fr))}.tool-token-copy small{font-size:10px}.project-art{height:340px}.project-copy p{font-size:14px}}
+
+/* Quiet hero actions with a clear primary and secondary hierarchy. */
+.hero-actions{gap:16px;padding:6px 0 10px}
+.hero-actions :is(.hero-primary,.hero-secondary){display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:13px 23px;border-radius:999px;font-size:13px;font-weight:500;line-height:1.5;gap:14px;transform:none;transition:background-color .25s ease,border-color .25s ease,box-shadow .25s ease,transform .25s ease}
+.hero-actions .hero-primary{background:#e6ddf6;color:#302234;border:1px solid transparent;box-shadow:0 3px 12px #160c2914}
+.hero-actions .hero-primary b,html[data-theme=light] .hero-actions .hero-primary b{display:inline-block;width:auto;height:auto;background:none;color:inherit;border:0;border-radius:0;font-size:19px;font-weight:400;line-height:1;transform:none;transition:transform .25s ease}
+.hero-actions .hero-secondary{background:transparent;color:var(--hero-ink);border:1px solid #c5bfd44d;box-shadow:none}
+.hero-actions .hero-secondary span{display:inline-block;margin:0;font-size:17px;line-height:1;transform:none;transition:transform .25s ease}
+html[data-theme=light] .hero-actions .hero-primary{background:#302234;color:#faf5ff}
+html[data-theme=light] .hero-actions .hero-secondary{border-color:#705a7940}
+.hero-actions :is(.hero-primary,.hero-secondary):focus-visible{outline:2px solid var(--hero-ink);outline-offset:5px;transform:none}
+@media(hover:hover) and (pointer:fine){
+ .hero-actions .hero-primary:hover{background:#f0e9fc;box-shadow:0 5px 16px #160c2920;transform:translateY(-1px)}
+ html[data-theme=light] .hero-actions .hero-primary:hover{background:#44314d}
+ .hero-actions .hero-secondary:hover{background:#c5bfd414;border-color:#c5bfd480}
+ html[data-theme=light] .hero-actions .hero-secondary:hover{background:#705a790a;border-color:#705a7966}
+ .hero-actions .hero-primary:hover b{transform:translate(2px,-2px)}
+ .hero-actions .hero-secondary:hover span{transform:translateY(2px)}
+}
+.hero-actions :is(.hero-primary,.hero-secondary):active{transform:translateY(0);box-shadow:none}
+@media(max-width:650px){.hero-actions{gap:12px}.hero-actions :is(.hero-primary,.hero-secondary){padding:12px 18px;min-height:48px;font-size:12px;gap:10px}}
+@media(prefers-reduced-motion:reduce){.hero-actions,.hero-actions *{animation:none!important;transition:none!important}.hero-actions :is(.hero-primary,.hero-secondary),.hero-actions .hero-primary b,.hero-actions .hero-secondary span{transform:none!important}}
