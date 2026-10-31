@@ -743,3 +743,33 @@ html:not([data-theme=light]) header nav a:is(:hover,:focus-visible,[aria-current
 html:not([data-theme=light]) header .nav-contact{background:color-mix(in srgb,var(--accent) 9%,transparent);border-color:var(--line)}
 @media(prefers-reduced-motion:reduce){html:not([data-theme=light]) :is(header,.side-rail){transition:none}}
 html:not([data-theme=light]) .progress{background:var(--chrome-accent,var(--accent));transition:background-color .6s ease}
+
+/* Focus the portfolio on work, with quiet navigation and a compact introduction. */
+body{padding-left:0}
+.side-rail,.brand-agent,.tool-strip .ticker-toggle{display:none!important}
+.hero-editorial{padding-top:24px}
+.hero .data-scene{max-width:880px;margin:20px auto 12px}
+.hero #data-canvas{aspect-ratio:1400/340;margin-top:0}
+.hero .scene-labels{margin-top:0}
+.hero .scene-labels small,.hero .scene-footer{display:none}
+.hero-description{margin:20px auto}
+.hero-location{margin-top:20px}
+.hero-atmosphere *{animation:none!important}
+.tool-strip .ticker{animation:none!important;transform:none!important;width:100%}
+.tool-strip .tool-window{overflow:visible}
+.tool-strip .tool-group{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));width:100%}
+.tool-strip .tool-group+.tool-group{display:none}
+.tool-strip .tool-token{min-width:0;padding:18px 12px;justify-content:center}
+.tool-token-number{display:none}
+.tool-token-copy strong{font-size:18px}
+.projects{gap:48px 32px}
+.project:nth-child(2){margin-top:0}
+.project-art{height:400px;border-radius:20px}
+.project-copy{padding:24px 4px 0}
+.project-copy p{max-width:56ch;font-size:15px;line-height:1.8}
+.project:hover .donut{rotate:0deg}
+.nav-roll>span{transform:none!important}
+header .nav-contact{transform:none!important}
+header .theme-toggle:hover{rotate:0deg}
+@media(max-width:900px){.tool-strip .tool-group{grid-template-columns:repeat(3,minmax(0,1fr))}.tool-strip .tool-token{justify-content:flex-start}.hero .data-scene{max-width:680px}}
+@media(max-width:650px){.hero-editorial{padding-top:28px}.hero .data-scene{max-width:360px}.hero #data-canvas{aspect-ratio:1/1}.hero .scene-labels{display:none}.hero-actions{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:20px}.tool-strip .tool-group{grid-template-columns:repeat(2,minmax(0,1fr))}.tool-token-copy small{font-size:10px}.project-art{height:340px}.project-copy p{font-size:14px}}
